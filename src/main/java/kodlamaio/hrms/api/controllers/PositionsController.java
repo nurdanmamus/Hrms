@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.PositionService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Position;
 
 @RestController
@@ -25,9 +29,16 @@ public class PositionsController {
 	// kodlama.oi/api/positions/getall -> böyle bir istek gelirse bu class
 	// karşılayacak
 	@GetMapping("/getall")
-	public List<Position> getAll() {
-		// api-> bussiness-> dataAccedd
+	public DataResult<List<Position>> getAll() {
 		return this.positionService.getAll();
+		// return new DataResult(this.productService.getAll(),false,null);
+	}
+	
+	@PostMapping("/add")
+	public Result add(@RequestBody Position position) {
+		return this.positionService.add(position);
+		//return new Result(true,"Ürün eklendi");
+		
 	}
 
 }
