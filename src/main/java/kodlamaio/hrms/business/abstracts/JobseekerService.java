@@ -11,5 +11,6 @@ public interface JobseekerService {
    
 	DataResult<List<Jobseeker>> getAll();
 	Result add(JobseekerDto jobseekerDto);
+	DataResult<Jobseeker> getByEmailOrTckn(String email, String tckn);
 
 }

@@ -9,6 +9,7 @@ import kodlamaio.hrms.entities.concretes.Position;
 
 public interface PositionDao extends JpaRepository<Position,Integer>{
 	
-	DataResult<List<Position>> findByNameIs(String name);
+//	DataResult<List<Position>> findByPositionNameIs(String name);
+	Position getByPositionName(String positionName);
 
 }

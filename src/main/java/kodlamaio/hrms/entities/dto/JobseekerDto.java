@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class JobseekerDto {
 	
-	private String name;
+	private String jobseekerName;
 	private String surname;
 	private String tckn;
 	private String yearOfBirth;

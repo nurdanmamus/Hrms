@@ -27,7 +27,7 @@ public class Jobseeker extends User{
 	private int jobseekerId;
 */	
 	@Column(name = "name")
-	private String name;
+	private String jobseekerName;
 	
 	@Column(name = "surname")
 	private String surname;

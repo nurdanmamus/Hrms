@@ -35,22 +35,19 @@ public class PositionManager implements PositionService {
 	@Override
 	public Result add(Position position) {
 
-		if (this.checkIfPositionExists(position).isSuccess()) {
+		if (this.getByPositionName(position.getPositionName()).getData() == null) {
 			this.positionDao.save(position);
 			return new SuccessResult("Job position is added.");
 		} else {
-			return new ErrorResult("Job position is not added.");
+			return new ErrorResult("Job position is already exists.");
 		}
 
 	}
 
-	private Result checkIfPositionExists(Position position) {
-		boolean result = this.positionDao.findByNameIs(position.getName()).isSuccess();
 
-		if (result) {
-			return new SuccessResult();
-		} else {
-			return new ErrorResult("Job position is already exists.");
-		}
+	@Override
+	public DataResult<Position> getByPositionName(String positionName) {
+
+		return new SuccessDataResult<Position>(this.positionDao.getByPositionName(positionName), "Data Listelendi");
 	}
 }

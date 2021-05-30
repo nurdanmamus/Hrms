@@ -8,6 +8,6 @@ import kodlamaio.hrms.entities.concretes.Jobseeker;
 
 public interface JobseekerDao extends JpaRepository<Jobseeker,Integer>{
 	
-	Boolean existsByEmailOrTckn(String email, String tckn);
+	Jobseeker getByEmailOrTckn(String email, String tckn);
 
 }
