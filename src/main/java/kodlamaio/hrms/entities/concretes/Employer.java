@@ -43,5 +43,6 @@ public class Employer extends User{
 	
 	@OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
 	private List<Job> jobs;
+    
 
 }
