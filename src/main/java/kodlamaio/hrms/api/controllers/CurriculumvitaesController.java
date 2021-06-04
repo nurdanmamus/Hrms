@@ -1,19 +1,21 @@
 package kodlamaio.hrms.api.controllers;
 
-import java.util.List;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.CurriculumvitaeService;
-import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.CurriculumVitae;
-import kodlamaio.hrms.entities.concretes.Position;
+
 
 @RestController
 @RequestMapping("/api/curriculumvitaes")
@@ -34,10 +36,20 @@ public class CurriculumvitaesController {
 		
 	}
 	
-	@GetMapping("/getall")
-	public DataResult<List<CurriculumVitae>> getAll() {
-		return this.curriculumvitaeService.getAll();
-		// return new DataResult(this.productService.getAll(),false,null);
+	@GetMapping("/getdetail")
+	public ResponseEntity<?> getallbyjobseekerid(@RequestParam int id, @RequestParam int jobseekerId) {
+		return ResponseEntity.ok(this.curriculumvitaeService.getByJobseekerId(id , jobseekerId));
 	}
+	
+	@PostMapping("/uploadPhoto")
+	public Result uploadPhoto(@RequestParam int cvId, @RequestParam("file") MultipartFile multipartFile) throws IOException{
+		return curriculumvitaeService.uploadPhoto(cvId, multipartFile);
+	}
+	
+	
+	
+	
+	
+	
 
 }

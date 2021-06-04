@@ -1,6 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,42 +23,29 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "education_informations")
+@Table(name = "foreign_language_informations")
 @Entity
 //@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "curriculumVitae" }) 
-public class EducationInformation {
-
+public class ForeignLanguageInformation {
+	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-    
+	
 	@NotNull
 	@JoinColumn(name = "cv_id")
 	@ManyToOne()
-	private CurriculumVitae curriculumVitae;
-
-	@NotBlank
+	private CurriculumVitae curriculumVitae; 
+	
 	@NotNull
-    @ManyToOne()
-	@JoinColumn(name="school_id")
-	private School school; 
-//	private String schoolName;
-
-	@NotBlank
-	@NotNull
-	@Column(name = "department_name")
-	private String departmentName;
-
-	@NotBlank
-	@NotNull
-	@Column(name = "beginning_date")
-	private LocalDate beginningDate;
-
-	@Column(name = "finish_date")
-	private LocalDate finishDate;
-
-	@Column(name = "graduated")
-	private Boolean graduated;
+	@ManyToOne
+	@JoinColumn(name="language_id")
+	private ForeignLanguage foreignLanguage;
+	
+	@Min(1)
+	@Max(5)
+	@Column(name="language_level") 
+	private char languageLevel;
 
 }

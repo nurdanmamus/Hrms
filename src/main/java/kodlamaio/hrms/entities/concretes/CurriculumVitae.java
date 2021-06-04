@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,6 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "curriculumvitaes")
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "educationInformation", "workExperiences" ,"foreignLanguageInformations"})
 public class CurriculumVitae {
 
 	@Id
@@ -41,11 +41,27 @@ public class CurriculumVitae {
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name = "jobseeker_id")
+	@JoinColumn(name = "jobseeker_id") 
 	private Jobseeker jobseeker;
+	
+	@Column(name="photo_url")
+	private String photoUrl;
 
 	@OneToMany(mappedBy = "curriculumVitae")
-    @JsonIgnore
+    @JsonIgnore()
 	private List<EducationInformation> educationInformations;
+	
+	@OneToMany(mappedBy = "curriculumVitae")
+	@JsonIgnore()
+	private List<WorkExperience> workExperiences; 
+	
+	@OneToMany(mappedBy = "curriculumVitae")
+	@JsonIgnore()
+	private List<ForeignLanguageInformation> foreignLanguageInformations;
+   
+   
+	
+	
 
 }
+

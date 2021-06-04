@@ -22,7 +22,7 @@ public class EducationInformationManager implements EducationInformationService 
 
 	@Override
 	public Result add(EducationInformation educationInformation) {
-		// TODO Auto-generated method stub
+//		System.out.println(educationInformation.getCurriculumVitae().getId());
 		this.educationInformationDao.save(educationInformation);
 
 		return new SuccessResult();
