@@ -45,7 +45,6 @@ public class CurriculumviateManager implements CurriculumvitaeService {
 
 	@Override
 	public DataResult<List<CurriculumVitae>> getAll() {
-		// TODO Auto-generated method stub
 		return new SuccessDataResult<List<CurriculumVitae>>(this.curriculumvitaeDao.findAll(), "Cv'ler listelendi.");
 	}
 
@@ -63,6 +62,7 @@ public class CurriculumviateManager implements CurriculumvitaeService {
 
 	@Override
 	public Result uploadPhoto(int cvId, MultipartFile multipartFile) throws IOException {
+		
 		DataResult<Map> result= cloudinaryService.upload(multipartFile);
 		CurriculumVitae curriculumVitae = this.curriculumvitaeDao.getById(cvId);
 		curriculumVitae.setPhotoUrl(result.getData().get("url").toString());

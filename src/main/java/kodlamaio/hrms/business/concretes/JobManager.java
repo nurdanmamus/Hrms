@@ -42,8 +42,8 @@ public class JobManager implements JobService {
 	public Result add(JobDto jobDto) {
 
 		Job job = modelMapper.map(jobDto, Job.class);
-		job.setEmployer(this.employerDao.getByCompanyName(jobDto.getCompanyName()));
-		job.setPosition(this.positionDao.getByPositionName(jobDto.getPositionName()));
+//		job.setEmployer(this.employerDao.getByCompanyName(jobDto.getCompanyName()));
+//		job.setPosition(this.positionDao.getByPositionName(jobDto.getPositionName()));
 		job.setActive(true);
 		LocalDate localDate = LocalDate.now();
 		job.setReleaseDate(localDate);
@@ -76,8 +76,8 @@ public class JobManager implements JobService {
 
 		jobs.forEach(item -> {
 			ListJobDto listJobDto = modelMapper.map(item, ListJobDto.class);
-			listJobDto.setCompanyName(item.getEmployer().getCompanyName());
-			listJobDto.setPositionName(item.getPosition().getPositionName());
+//			listJobDto.setCompanyName(item.getEmployer().getCompanyName());
+//			listJobDto.setPositionName(item.getPosition().getPositionName());
 			listJobDtos.add(listJobDto);
 		});
 
